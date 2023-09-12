@@ -7,5 +7,5 @@ export default {
   theme: {
     extend: {}
   },
-  plugins: [require('autoprefixer')]
+  plugins: [['prettier-plugin-tailwindcss'], require('autoprefixer')]
 }

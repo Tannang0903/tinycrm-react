@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AppProvider } from './contexts/app.context.tsx'
+import { AppProvider } from './modules/Share/contexts/app.context.tsx'
 import { HelmetProvider } from 'react-helmet-async'
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx'
+import ErrorBoundary from './modules/Share/components/ErrorBoundary/ErrorBoundary.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
