@@ -9,11 +9,14 @@ const Login = lazy(() => import('../../Authentication/pages/Login'))
 
 const Dashboard = lazy(() => import('../../Home/pages'))
 
-const Accounts = lazy(() => import('../../Account/pages/Account'))
+const Account = lazy(() => import('../../Account/pages/Account'))
 const CreateAccount = lazy(() => import('src/modules/Account/pages/CreateAccount'))
 const EditAccount = lazy(() => import('src/modules/Account/pages/EditAccount'))
 
-const Contacts = lazy(() => import('../../Contact/pages'))
+const Contact = lazy(() => import('../../Contact/pages/Contact'))
+const CreateContact = lazy(() => import('src/modules/Contact/pages/CreateContact'))
+const EditContact = lazy(() => import('src/modules/Contact/pages/EditContact'))
+
 const Leads = lazy(() => import('../../Lead/pages'))
 const Deals = lazy(() => import('../../Deal/pages'))
 const Products = lazy(() => import('../../Product/pages'))
@@ -67,7 +70,7 @@ const useRouteElements = () => {
           element: (
             <MainLayout>
               <Suspense>
-                <Accounts />
+                <Account />
               </Suspense>
             </MainLayout>
           )
@@ -97,7 +100,27 @@ const useRouteElements = () => {
           element: (
             <MainLayout>
               <Suspense>
-                <Contacts />
+                <Contact />
+              </Suspense>
+            </MainLayout>
+          )
+        },
+        {
+          path: path.create_contact,
+          element: (
+            <MainLayout>
+              <Suspense>
+                <CreateContact />
+              </Suspense>
+            </MainLayout>
+          )
+        },
+        {
+          path: path.edit_contact,
+          element: (
+            <MainLayout>
+              <Suspense>
+                <EditContact />
               </Suspense>
             </MainLayout>
           )

@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { createSearchParams } from 'react-router-dom'
 import useQueryAccountConfig from './useQueryAccountConfig'
 
-const useSearch = () => {
+const useSearchAccount = () => {
   const queryAccountConfig = useQueryAccountConfig()
 
   const { register, handleSubmit } = useForm<InputSearchType>({
@@ -25,4 +25,4 @@ const useSearch = () => {
   return { register, handleSubmitSearch }
 }
 
-export default useSearch
+export default useSearchAccount

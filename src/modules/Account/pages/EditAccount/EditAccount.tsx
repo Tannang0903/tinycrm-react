@@ -94,7 +94,7 @@ const EditAccount = () => {
     <Fragment>
       <Helmet>
         <title>Edit Account</title>
-        <meta name='description' content='Đây là trang Create Account của dự án' />
+        <meta name='description' content='This is edit account page of the project' />
       </Helmet>
       <div>
         <div className='flex justify-between items-center pt-[16px] pb-[40px]'>
