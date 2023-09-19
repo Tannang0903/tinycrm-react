@@ -6,7 +6,7 @@ import { SelectPageSizeSchema } from 'src/modules/Share/utils/rules'
 import path from 'src/modules/Share/constants/path'
 import useQueryAccountConfig, { QueryAccountConfig } from 'src/modules/Account/hooks/useQueryAccountConfig'
 
-const useSelect = () => {
+const useSelectAccountPage = () => {
   const queryAccountConfig = useQueryAccountConfig()
 
   const navigate = useNavigate()
@@ -32,4 +32,4 @@ const useSelect = () => {
   return { register, handleChangeOption }
 }
 
-export default useSelect
+export default useSelectAccountPage

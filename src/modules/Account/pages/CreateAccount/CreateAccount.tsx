@@ -79,11 +79,7 @@ const CreateAccount = () => {
         <div className='grid grid-cols-3 gap-6'>
           <div className='col-span-2'>
             <form onSubmit={onSubmit}>
-              <CreateAccountForm
-                register={register}
-                errors={errors}
-                handleCancelCreate={handleCancelCreate}
-              ></CreateAccountForm>
+              <CreateAccountForm register={register} errors={errors} handleCancelCreate={handleCancelCreate} />
             </form>
           </div>
           <div className='col-span-1'>

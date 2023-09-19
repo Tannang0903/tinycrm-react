@@ -7,10 +7,10 @@ import InputSearch from 'src/modules/Share/components/InputSearch'
 import Pagination from 'src/modules/Share/components/Pagination'
 import path from 'src/modules/Share/constants/path'
 import useQueryConfig from 'src/modules/Account/hooks/useQueryAccountConfig'
-import useSearch from 'src/modules/Account/hooks/useSearch'
 import { Account, AccountListConfig } from 'src/modules/Account/interfaces/account.type'
-import useSelect from '../../hooks/useSelect'
 import AccountTable from '../../components/AccountTable'
+import useSearchAccount from '../../hooks/useSearchAccount'
+import useSelectAccountPage from '../../hooks/useSelectAccountPage'
 
 const Accounts = () => {
   const [isSortingName, setIsSortingName] = useState<boolean>(false)
@@ -20,9 +20,9 @@ const Accounts = () => {
 
   const navigate = useNavigate()
 
-  const SearchForm = useSearch()
+  const SearchForm = useSearchAccount()
 
-  const SelectedForm = useSelect()
+  const SelectedForm = useSelectAccountPage()
 
   const AccountsListQuery = useQuery({
     queryKey: ['accounts', queryAccountConfig],
