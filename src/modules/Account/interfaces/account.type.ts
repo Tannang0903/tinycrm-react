@@ -8,6 +8,7 @@ export interface Account {
 }
 
 export interface AccountListConfig {
+  id?: string
   name?: string
   sorting?: string
   page?: number

@@ -4,6 +4,9 @@ import Popover from '../Popover'
 import { clearTokenFromLS } from 'src/modules/Share/utils/auth'
 import { Fragment, useContext } from 'react'
 import { AppContext } from 'src/modules/Share/contexts/app.context'
+import { useQuery } from '@tanstack/react-query'
+import accountAPI from 'src/modules/Account/services/account.api'
+import useQueryAccountConfig from 'src/modules/Account/hooks/useQueryAccountConfig'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -16,7 +19,16 @@ const Header = () => {
     navigate(path.login)
   }
 
+  const queryAccountConfig = useQueryAccountConfig()
+
   const location = useLocation().pathname.split('/').slice(1)
+
+  const AccountQuery = useQuery({
+    queryKey: ['account', queryAccountConfig],
+    queryFn: () => accountAPI.getAccount(queryAccountConfig.id as string),
+    enabled: queryAccountConfig.id !== undefined
+  })
+  const account = AccountQuery.data?.data
 
   return (
     <div className='sticky top-0 h-[64px] flex shrink-0 bg-white z-10'>
@@ -41,8 +53,12 @@ const Header = () => {
             <Fragment>
               <span>{location[0]}</span>
               <div className='h-6 mx-4 border-r border-gray-300 -skew-x-12'></div>
-              {location[1] ? (
-                <span className='text-gray-500'>{location[1]}</span>
+              {account ? (
+                <Fragment>
+                  <span className='text-gray-500'>{account.name}</span>
+                  <div className='h-6 mx-4 border-r border-gray-300 -skew-x-12'></div>
+                  <span className='text-gray-500'>Edit</span>
+                </Fragment>
               ) : (
                 <span className='text-gray-500'>List</span>
               )}

@@ -3,7 +3,7 @@ const path = {
   login: '/login',
   accounts: '/accounts',
   create_account: '/accounts/create',
-  edit_account: '/accounts/:id',
+  edit_account: '/accounts/edit',
   contacts: '/contacts',
   leads: '/leads',
   deals: '/deals',

@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { createSearchParams, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import accountAPI from 'src/modules/Account/services/account.api'
 import path from 'src/modules/Share/constants/path'
@@ -10,23 +10,23 @@ import { toast } from 'react-toastify'
 import { FormAccountSchema, FormAccountType } from '../../utils/rules'
 import EditAccountForm from '../../components/EditAccountForm'
 import { Account } from '../../interfaces/account.type'
+import useQueryAccountConfig from '../../hooks/useQueryAccountConfig'
 
 const EditAccount = () => {
-  const { id } = useParams()
-
   const navigate = useNavigate()
-
-  const location = useLocation()
-
-  const queryAccountConfig = location.state
 
   const queryClient = useQueryClient()
 
-  const AccountQuery = useQuery({
-    queryKey: ['account'],
-    queryFn: () => accountAPI.getAccount(id as string)
-  })
+  const location = useLocation()
 
+  const prevAccountConfig = location.state
+
+  const queryAccountConfig = useQueryAccountConfig()
+
+  const AccountQuery = useQuery({
+    queryKey: ['account', queryAccountConfig],
+    queryFn: () => accountAPI.getAccount(queryAccountConfig.id as string)
+  })
   const account = AccountQuery.data?.data as Account
 
   const {
@@ -55,7 +55,7 @@ const EditAccount = () => {
           })
           navigate({
             pathname: path.accounts,
-            search: createSearchParams(queryAccountConfig).toString()
+            search: createSearchParams(prevAccountConfig).toString()
           })
         }
       }
@@ -65,7 +65,7 @@ const EditAccount = () => {
   const handleCancelEdit = () => {
     navigate({
       pathname: path.accounts,
-      search: createSearchParams(queryAccountConfig).toString()
+      search: createSearchParams(prevAccountConfig).toString()
     })
   }
 
@@ -79,12 +79,12 @@ const EditAccount = () => {
     DeleteAccountMutation.mutate(id, {
       onSuccess: () => {
         toast.success('Delete Account Successfully !')
-        queryClient.invalidateQueries({
-          queryKey: ['accounts']
-        })
         navigate({
           pathname: path.accounts,
-          search: createSearchParams(queryAccountConfig).toString()
+          search: createSearchParams(prevAccountConfig).toString()
+        })
+        queryClient.invalidateQueries({
+          queryKey: ['accounts']
         })
       }
     })

@@ -16,7 +16,7 @@ const CreateAccount = () => {
 
   const location = useLocation()
 
-  const queryAccountConfig = location.state
+  const prevAccountConfig = location.state
 
   const queryClient = useQueryClient()
 
@@ -44,7 +44,7 @@ const CreateAccount = () => {
         })
         navigate({
           pathname: path.accounts,
-          search: createSearchParams(queryAccountConfig).toString()
+          search: createSearchParams(prevAccountConfig).toString()
         })
       },
       onError: (error) => {
@@ -62,7 +62,7 @@ const CreateAccount = () => {
   const handleCancelCreate = () => {
     navigate({
       pathname: path.accounts,
-      search: createSearchParams(queryAccountConfig).toString()
+      search: createSearchParams(prevAccountConfig).toString()
     })
   }
 

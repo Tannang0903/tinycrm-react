@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, createSearchParams } from 'react-router-dom'
 import { Account } from '../../interfaces/account.type'
 import path from 'src/modules/Share/constants/path'
 import { QueryAccountConfig } from '../../hooks/useQueryAccountConfig'
@@ -95,7 +95,12 @@ const AccountTable = ({
               <th className='px-4 py-4 font-medium'>{account.totalSales}</th>
               <th className='px-4 py-4 font-medium'>
                 <Link
-                  to={`${path.accounts}/${account.id}`}
+                  to={{
+                    pathname: path.edit_account,
+                    search: createSearchParams({
+                      id: account.id
+                    }).toString()
+                  }}
                   state={queryAccountConfig}
                   className='w-[80px] flex items-center justify-center text-[#16a34a] hover:text-[#22c55e]'
                 >

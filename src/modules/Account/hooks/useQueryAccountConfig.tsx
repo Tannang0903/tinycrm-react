@@ -14,7 +14,8 @@ const useQueryAccountConfig = () => {
       name: queryAccountParams.name,
       sorting: queryAccountParams.sorting || 'name',
       page: queryAccountParams.page || 1,
-      size: queryAccountParams.size || 10
+      size: queryAccountParams.size || 10,
+      id: queryAccountParams.id
     },
     isUndefined
   )
